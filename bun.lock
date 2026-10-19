@@ -5,8 +5,8 @@
     "": {
       "name": "@sudobility/characterbuilder_lib",
       "dependencies": {
-        "@sudobility/characterbuilder_client": "link:@sudobility/characterbuilder_client",
-        "@sudobility/characterbuilder_types": "link:@sudobility/characterbuilder_types",
+        "@sudobility/characterbuilder_client": "^0.1.1",
+        "@sudobility/characterbuilder_types": "^0.1.2",
       },
       "devDependencies": {
         "@eslint/js": "^9.38.0",
@@ -208,9 +208,11 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/characterbuilder_client": ["@sudobility/characterbuilder_client@link:@sudobility/characterbuilder_client", {}],
+    "@sudobility/characterbuilder_client": ["@sudobility/characterbuilder_client@0.1.1", "", { "dependencies": { "@sudobility/characterbuilder_types": "^0.1.2" }, "peerDependencies": { "@tanstack/react-query": ">=5.0.0", "react": ">=18.0.0" } }, "sha512-zIgruYVT72nbSh0BQgET7wVpuer7QobLztkVgSlV94Uivq3W5iDJBtF8U44Q4JEkumFR5QvMEeCeq7IGuLJGgw=="],
 
-    "@sudobility/characterbuilder_types": ["@sudobility/characterbuilder_types@link:@sudobility/characterbuilder_types", {}],
+    "@sudobility/characterbuilder_types": ["@sudobility/characterbuilder_types@0.1.2", "", { "dependencies": { "@sudobility/types": "^1.9.68", "zod": "^4.6.5" } }, "sha512-XSlVp7shI5dd2ms/O4XEyzzeM9mIMUmZqQnh3vopWtcv7SclhaI+OpKaT35aoHc28oAEM1FJ6rDZ4H0C37Y0Yw=="],
+
+    "@sudobility/types": ["@sudobility/types@1.9.68", "", {}, "sha512-4LL5+UfcqQcc0PKKR/z/PqS6j9DQPVkkjL+3oOW+Bwx0TAu1SVKAlPhlt/9ruNMW+abcHuZoFvbOVD5gdYBSGw=="],
 
     "@tanstack/query-core": ["@tanstack/query-core@5.104.2", "", {}, "sha512-/qbsxJK5c3Ve1aFIULWYNcT2jeRUAiD4HME6Eu2ZdpofHoVgAjpkQhLg5xHuOoBkTPQUJLfP7zOxy0qsBcqROA=="],
 
@@ -519,6 +521,8 @@
     "word-wrap": ["word-wrap@1.2.5", "", {}, "sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA=="],
 
     "yocto-queue": ["yocto-queue@0.1.0", "", {}, "sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q=="],
+
+    "zod": ["zod@4.6.7", "", {}, "sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg=="],
 
     "zustand": ["zustand@5.0.15", "", { "peerDependencies": { "@types/react": ">=18.0.0", "immer": ">=9.0.6", "react": ">=18.0.0", "use-sync-external-store": ">=1.2.0" }, "optionalPeers": ["@types/react", "immer", "react", "use-sync-external-store"] }, "sha512-MpSEjRiBkA9crSYeOUH32rJC7SVqAbm0Fqcqge/bUi2PPoLcBWKOsG+C8mevmpr8TwXHBVkChbbJiyvkE+i/3A=="],
 
