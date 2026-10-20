@@ -5,8 +5,8 @@
     "": {
       "name": "@sudobility/characterbuilder_lib",
       "dependencies": {
-        "@sudobility/characterbuilder_client": "^0.1.1",
-        "@sudobility/characterbuilder_types": "^0.1.2",
+        "@sudobility/characterbuilder_client": "^0.1.2",
+        "@sudobility/characterbuilder_types": "^0.1.3",
       },
       "devDependencies": {
         "@eslint/js": "^9.38.0",
@@ -208,9 +208,9 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/characterbuilder_client": ["@sudobility/characterbuilder_client@0.1.1", "", { "dependencies": { "@sudobility/characterbuilder_types": "^0.1.2" }, "peerDependencies": { "@tanstack/react-query": ">=5.0.0", "react": ">=18.0.0" } }, "sha512-zIgruYVT72nbSh0BQgET7wVpuer7QobLztkVgSlV94Uivq3W5iDJBtF8U44Q4JEkumFR5QvMEeCeq7IGuLJGgw=="],
+    "@sudobility/characterbuilder_client": ["@sudobility/characterbuilder_client@0.1.2", "", { "dependencies": { "@sudobility/characterbuilder_types": "^0.1.3" }, "peerDependencies": { "@tanstack/react-query": ">=5.0.0", "react": ">=18.0.0" } }, "sha512-EiQl4aM2HoxuQ1SemuU8LLc8sp0guBQglBufTerqFTklpXqmLUcZcX9z16hbQO9Nehu04/SWJR3UphrMfMzUFg=="],
 
-    "@sudobility/characterbuilder_types": ["@sudobility/characterbuilder_types@0.1.2", "", { "dependencies": { "@sudobility/types": "^1.9.68", "zod": "^4.6.5" } }, "sha512-XSlVp7shI5dd2ms/O4XEyzzeM9mIMUmZqQnh3vopWtcv7SclhaI+OpKaT35aoHc28oAEM1FJ6rDZ4H0C37Y0Yw=="],
+    "@sudobility/characterbuilder_types": ["@sudobility/characterbuilder_types@0.1.3", "", { "dependencies": { "@sudobility/types": "^1.9.68", "zod": "^4.6.5" } }, "sha512-nPWdrp8k39Wc8dI+LMXm7C0IQ6VDnxK7hhDw+OZlrq6UQca4Qlbof8V8C0iAl4DNas8Y0++b1AEVwtN1OzBtGg=="],
 
     "@sudobility/types": ["@sudobility/types@1.9.68", "", {}, "sha512-4LL5+UfcqQcc0PKKR/z/PqS6j9DQPVkkjL+3oOW+Bwx0TAu1SVKAlPhlt/9ruNMW+abcHuZoFvbOVD5gdYBSGw=="],
 
