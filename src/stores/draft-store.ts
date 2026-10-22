@@ -1,5 +1,6 @@
 import { createStore, type StoreApi } from 'zustand/vanilla';
 import {
+  applyFemaleFacialHairRule,
   composePrompt,
   type Character,
   type FaceSpec,
@@ -29,6 +30,8 @@ export interface DraftState {
     key: K,
     value: FaceSpec[K] | undefined
   ): void;
+  /** Merge a partial spec over the current one (e.g. AI-inferred traits), as one undo step. */
+  mergeSpec(patch: Partial<FaceSpec>): void;
   setParams(patch: Partial<GenerationParams>): void;
   load(character: Character): void;
   reset(): void;
@@ -41,6 +44,8 @@ export interface DraftState {
 }
 
 const EMPTY_META: DraftMeta = { name: '', role: '', notes: '' };
+/** Default generation params for a fresh draft. Look 7 (conformity 0.7). */
+const DEFAULT_PARAMS: Partial<GenerationParams> = { conformity: 0.7 };
 
 const ENUM_FEATURES = FEATURE_GROUPS.flatMap((g) => g.features).filter(
   (f) => f.kind === 'enum' && f.options
@@ -53,7 +58,7 @@ export function createDraftStore(initial?: Partial<DraftState>): DraftStore {
     characterId: null,
     meta: EMPTY_META,
     spec: {},
-    params: {},
+    params: { ...DEFAULT_PARAMS },
     past: [],
     future: [],
     dirty: false,
@@ -65,10 +70,28 @@ export function createDraftStore(initial?: Partial<DraftState>): DraftStore {
 
     setFeature(key, value) {
       set((s) => {
-        const spec = { ...s.spec };
-        if (value === undefined) delete spec[key];
-        else spec[key] = value;
+        const next = { ...s.spec };
+        if (value === undefined) delete next[key];
+        else next[key] = value;
+        // Keep the female → no-facial-hair rule live (setting sex female clears
+        // facial hair; a beard set on a female is forced clean-shaven).
+        const spec = applyFemaleFacialHairRule(next);
         return { spec, past: [...s.past, s.spec], future: [], dirty: true };
+      });
+    },
+
+    mergeSpec(patch) {
+      set((s) => {
+        // Drop undefined so a cleared trait in the patch never erases an existing one.
+        const clean = Object.fromEntries(
+          Object.entries(patch).filter(([, v]) => v !== undefined)
+        );
+        return {
+          spec: applyFemaleFacialHairRule({ ...s.spec, ...clean }),
+          past: [...s.past, s.spec],
+          future: [],
+          dirty: true,
+        };
       });
     },
 
@@ -96,7 +119,7 @@ export function createDraftStore(initial?: Partial<DraftState>): DraftStore {
         characterId: null,
         meta: EMPTY_META,
         spec: {},
-        params: {},
+        params: { ...DEFAULT_PARAMS },
         past: [],
         future: [],
         dirty: false,

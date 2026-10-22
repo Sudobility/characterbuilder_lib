@@ -111,7 +111,6 @@ import {
   FACIAL_HAIR_DENSITIES,
   SEXES,
   AGE_BANDS,
-  ANCESTRIES,
   BUILDS,
   ASYMMETRY_LEVELS,
   ASYMMETRY_FEATURES,
@@ -225,13 +224,11 @@ export const FEATURE_GROUPS: FeatureGroup[] = [
     id: 'demographics',
     title: 'Who they are',
     blurb:
-      'Steers the casting range. Ancestry is a tendency, never a rule — any feature can pair with any ancestry.',
+      'Steers the casting range. Demographic is a tendency, never a rule — any feature can pair with any background.',
     features: [
       e('sex', 'Sex', SEXES),
       e('ageBand', 'Age band', AGE_BANDS),
       { key: 'ageYears', label: 'Exact age', kind: 'number', min: 1, max: 120 },
-      e('ancestry', 'Ancestry', ANCESTRIES),
-      text('ancestryNote', 'Ancestry note', 'e.g. Horn of Africa; Levantine'),
       e('build', 'Build', BUILDS),
     ],
   },
