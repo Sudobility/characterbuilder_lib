@@ -45,7 +45,10 @@ export interface DraftState {
 
 const EMPTY_META: DraftMeta = { name: '', role: '', notes: '' };
 /** Default generation params for a fresh draft. Look 7 (conformity 0.7). */
-const DEFAULT_PARAMS: Partial<GenerationParams> = { conformity: 0.7 };
+const DEFAULT_PARAMS: Partial<GenerationParams> = {
+  conformity: 0.7,
+  artStyle: 'naturalistic',
+};
 
 const ENUM_FEATURES = FEATURE_GROUPS.flatMap((g) => g.features).filter(
   (f) => f.kind === 'enum' && f.options
