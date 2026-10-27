@@ -1,6 +1,6 @@
 {
   "name": "@sudobility/characterbuilder_lib",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Frontend business logic for CharacterBuilder: FaceSpec draft store, form metadata, prompt preview",
   "type": "module",
   "main": "./dist/index.js",
@@ -26,7 +26,7 @@
     "CLAUDE.md"
   ],
   "dependencies": {
-    "@sudobility/characterbuilder_client": "^0.1.8",
+    "@sudobility/characterbuilder_client": "^0.1.9",
     "@sudobility/characterbuilder_types": "^0.1.7"
   },
   "peerDependencies": {
