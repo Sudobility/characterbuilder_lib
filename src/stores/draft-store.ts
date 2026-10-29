@@ -54,6 +54,39 @@ const ENUM_FEATURES = FEATURE_GROUPS.flatMap((g) => g.features).filter(
   (f) => f.kind === 'enum' && f.options
 );
 
+/** Translate old lip choices to slider midpoints when opening a saved draft. */
+function upgradeLegacyLipMeasurements(source: FaceSpec): FaceSpec {
+  const spec = { ...source };
+  if (spec.mouthWidthMm == null && spec.mouthWidth) {
+    spec.mouthWidthMm = { narrow: 41, medium: 51, wide: 61 }[spec.mouthWidth];
+  }
+  if (spec.philtrumLengthMm == null && spec.philtrumLength) {
+    spec.philtrumLengthMm = { short: 10.5, medium: 15.5, long: 21 }[
+      spec.philtrumLength
+    ];
+  }
+  if (
+    (spec.upperVermilionHeightMm == null ||
+      spec.lowerVermilionHeightMm == null) &&
+    (spec.vermilionHeight || spec.lipRatio)
+  ) {
+    const total = { thin: 14, medium: 20.5, tall: 28 }[
+      spec.vermilionHeight ?? 'medium'
+    ];
+    const share = { 'fuller-lower': 0.4, balanced: 0.49, 'fuller-upper': 0.57 }[
+      spec.lipRatio ?? 'balanced'
+    ];
+    spec.upperVermilionHeightMm ??= Math.round(total * share * 10) / 10;
+    spec.lowerVermilionHeightMm ??=
+      Math.round((total - spec.upperVermilionHeightMm) * 10) / 10;
+  }
+  delete spec.mouthWidth;
+  delete spec.philtrumLength;
+  delete spec.vermilionHeight;
+  delete spec.lipRatio;
+  return spec;
+}
+
 export type DraftStore = StoreApi<DraftState>;
 
 export function createDraftStore(initial?: Partial<DraftState>): DraftStore {
@@ -76,6 +109,17 @@ export function createDraftStore(initial?: Partial<DraftState>): DraftStore {
         const next = { ...s.spec };
         if (value === undefined) delete next[key];
         else next[key] = value;
+        // The measured controls supersede their legacy categorical counterparts.
+        // Clear the hidden old choice even when a slider returns to Any.
+        if (key === 'mouthWidthMm') delete next.mouthWidth;
+        if (key === 'philtrumLengthMm') delete next.philtrumLength;
+        if (
+          key === 'upperVermilionHeightMm' ||
+          key === 'lowerVermilionHeightMm'
+        ) {
+          delete next.vermilionHeight;
+          delete next.lipRatio;
+        }
         // Keep the female → no-facial-hair rule live (setting sex female clears
         // facial hair; a beard set on a female is forced clean-shaven).
         const spec = applyFemaleFacialHairRule(next);
@@ -90,7 +134,9 @@ export function createDraftStore(initial?: Partial<DraftState>): DraftStore {
           Object.entries(patch).filter(([, v]) => v !== undefined)
         );
         return {
-          spec: applyFemaleFacialHairRule({ ...s.spec, ...clean }),
+          spec: applyFemaleFacialHairRule(
+            upgradeLegacyLipMeasurements({ ...s.spec, ...clean })
+          ),
           past: [...s.past, s.spec],
           future: [],
           dirty: true,
@@ -110,7 +156,7 @@ export function createDraftStore(initial?: Partial<DraftState>): DraftStore {
           role: character.role ?? '',
           notes: character.notes ?? '',
         },
-        spec: character.spec,
+        spec: upgradeLegacyLipMeasurements(character.spec),
         past: [],
         future: [],
         dirty: false,

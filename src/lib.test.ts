@@ -37,6 +37,22 @@ describe('form metadata', () => {
 });
 
 describe('draft store', () => {
+  it('converts saved lip categories to measurements and clears them with the slider', () => {
+    const store = createDraftStore();
+    store.getState().mergeSpec({
+      mouthWidth: 'wide',
+      vermilionHeight: 'tall',
+      lipRatio: 'fuller-lower',
+      philtrumLength: 'long',
+    });
+    expect(store.getState().spec.mouthWidthMm).toBe(61);
+    expect(store.getState().spec.philtrumLengthMm).toBe(21);
+    expect(store.getState().spec.upperVermilionHeightMm).toBeTypeOf('number');
+    expect(store.getState().spec.mouthWidth).toBeUndefined();
+    store.getState().setFeature('mouthWidthMm', undefined);
+    expect(store.getState().spec.mouthWidthMm).toBeUndefined();
+    expect(store.getState().spec.mouthWidth).toBeUndefined();
+  });
   it('sets, undoes and redoes a feature', () => {
     const store = createDraftStore();
     store.getState().setFeature('faceShape', 'square');

@@ -50,10 +50,6 @@ import {
   COLUMELLAS,
   NASAL_INDICES,
   LIP_FULLNESSES,
-  LIP_RATIOS,
-  MOUTH_WIDTHS,
-  VERMILION_HEIGHTS,
-  PHILTRUM_LENGTHS,
   PHILTRUM_DEPTHS,
   CUPIDS_BOWS,
   MOUTH_CORNERS,
@@ -119,7 +115,7 @@ import {
   DIMPLES,
 } from '@sudobility/characterbuilder_types';
 
-export type FeatureKind = 'enum' | 'multi' | 'text' | 'number';
+export type FeatureKind = 'enum' | 'multi' | 'text' | 'number' | 'slider';
 
 export interface FeatureOption {
   value: string;
@@ -137,6 +133,8 @@ export interface FeatureMeta {
   placeholder?: string;
   min?: number;
   max?: number;
+  step?: number;
+  unit?: string;
 }
 
 export interface FeatureGroup {
@@ -214,6 +212,23 @@ const text = (
   label: string,
   placeholder?: string
 ): FeatureMeta => ({ key, label, kind: 'text', placeholder });
+
+const slider = (
+  key: keyof FaceSpec,
+  label: string,
+  min: number,
+  max: number,
+  help: string
+): FeatureMeta => ({
+  key,
+  label,
+  kind: 'slider',
+  min,
+  max,
+  step: 0.1,
+  unit: 'mm',
+  help,
+});
 
 /**
  * The whole comprehensive form, grouped head-to-chin. The app renders each group
@@ -314,10 +329,28 @@ export const FEATURE_GROUPS: FeatureGroup[] = [
     title: 'Mouth & lips',
     features: [
       e('lipFullness', 'Lip fullness', LIP_FULLNESSES),
-      e('lipRatio', 'Lip ratio', LIP_RATIOS),
-      e('mouthWidth', 'Mouth width', MOUTH_WIDTHS),
-      e('vermilionHeight', 'Vermilion', VERMILION_HEIGHTS),
-      e('philtrumLength', 'Philtrum length', PHILTRUM_LENGTHS),
+      slider('mouthWidthMm', 'Mouth width', 30, 75, 'Corner-to-corner width.'),
+      slider(
+        'upperVermilionHeightMm',
+        'Upper lip red height',
+        2,
+        18,
+        'Visible upper vermilion at the center.'
+      ),
+      slider(
+        'lowerVermilionHeightMm',
+        'Lower lip red height',
+        2,
+        20,
+        'Visible lower vermilion at the center.'
+      ),
+      slider(
+        'philtrumLengthMm',
+        'Philtrum length',
+        5,
+        30,
+        'Base of nose to upper lip border.'
+      ),
       e('philtrumDepth', 'Philtrum depth', PHILTRUM_DEPTHS),
       e('cupidsBow', "Cupid's bow", CUPIDS_BOWS),
       e('mouthCorners', 'Mouth corners', MOUTH_CORNERS),
