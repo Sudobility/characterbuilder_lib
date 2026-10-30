@@ -218,7 +218,8 @@ const slider = (
   label: string,
   min: number,
   max: number,
-  help: string
+  help: string,
+  unit = 'mm'
 ): FeatureMeta => ({
   key,
   label,
@@ -226,7 +227,7 @@ const slider = (
   min,
   max,
   step: 0.1,
-  unit: 'mm',
+  unit,
   help,
 });
 
@@ -277,6 +278,14 @@ export const FEATURE_GROUPS: FeatureGroup[] = [
       e('eyeSpacing', 'Eye spacing', EYE_SPACINGS),
       e('orbitalDepth', 'Socket depth', ORBITAL_DEPTHS),
       e('eyeShape', 'Eye shape', EYE_SHAPES),
+      slider(
+        'eyeOpeningRatioPercent',
+        'Eye opening height / width',
+        18,
+        55,
+        'Lower values give a narrower vertical opening; width and eyelid type remain separate.',
+        '%'
+      ),
       e('canthalTilt', 'Canthal tilt', CANTHAL_TILTS),
       e('lidType', 'Eyelid type', LID_TYPES),
       e('lidCrease', 'Lid crease', LID_CREASES),

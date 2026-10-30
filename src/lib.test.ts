@@ -9,6 +9,13 @@ import {
 import { createDraftStore } from './stores/draft-store';
 
 describe('form metadata', () => {
+  it('offers a measured eye-opening slider', () => {
+    const eye = FEATURE_BY_KEY.eyeOpeningRatioPercent;
+    expect(eye?.kind).toBe('slider');
+    expect(eye?.unit).toBe('%');
+    expect(eye?.min).toBe(18);
+    expect(eye?.max).toBe(55);
+  });
   it('every feature key is a valid FaceSpec field', () => {
     const specKeys = new Set(Object.keys(faceSpecSchema.shape));
     for (const g of FEATURE_GROUPS) {
