@@ -5,7 +5,7 @@
     "": {
       "name": "@sudobility/characterbuilder_lib",
       "dependencies": {
-        "@sudobility/characterbuilder_client": "^0.1.11",
+        "@sudobility/characterbuilder_client": "^0.1.12",
         "@sudobility/characterbuilder_types": "^0.1.9",
       },
       "devDependencies": {
@@ -110,7 +110,7 @@
 
     "@standard-schema/spec": ["@standard-schema/spec@1.1.0", "", {}, "sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w=="],
 
-    "@sudobility/characterbuilder_client": ["@sudobility/characterbuilder_client@0.1.11", "https://npm.pkg.github.com/download/@sudobility/characterbuilder_client/0.1.11/1f153f3ef4a4b63987008f47d864835b0c7beb44", { "dependencies": { "@sudobility/characterbuilder_types": "^0.1.9" }, "peerDependencies": { "@tanstack/react-query": ">=5.0.0", "react": ">=18.0.0" } }, "sha512-pt6A3fDibR4IUluESxEXuO8Fq1yya6fRyVgT58cI64v2iowj4ezY7H5PUTfpr6leCzoYN0EOoYEfSL41rZvFIQ=="],
+    "@sudobility/characterbuilder_client": ["@sudobility/characterbuilder_client@0.1.12", "https://npm.pkg.github.com/download/@sudobility/characterbuilder_client/0.1.12/5f4f0b4240d1f593705b7f7aa36b217a952dad5f", { "dependencies": { "@sudobility/characterbuilder_types": "^0.1.9" }, "peerDependencies": { "@tanstack/react-query": ">=5.0.0", "react": ">=18.0.0" } }, "sha512-zh1WtgIjatmQk00rfMxPTP/rgWFSyQ7Hf31+L7F6mWTEeVtGH2kureTSoVFK+z2eADkJ0NiRrMUfBDKhqWavNA=="],
 
     "@sudobility/characterbuilder_types": ["@sudobility/characterbuilder_types@0.1.9", "https://npm.pkg.github.com/download/@sudobility/characterbuilder_types/0.1.9/b050321818a5c8120ad6162479e3a360f717484a", { "dependencies": { "@sudobility/types": "^1.9.76", "zod": "~4.6.5" } }, "sha512-J6AdERQ2g/sm6Fkr3XFKNpUcTaVxskPpBeXXuzXZ5xDzKskLXLQRXnAfdfZGgq1C4Ul0LlZTtnPQ6imlYbQiVA=="],
 
