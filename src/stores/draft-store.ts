@@ -152,7 +152,7 @@ export function createDraftStore(initial?: Partial<DraftState>): DraftStore {
       set({
         characterId: character.id,
         meta: {
-          name: character.name,
+          name: character.name ?? '',
           role: character.role ?? '',
           notes: character.notes ?? '',
         },
